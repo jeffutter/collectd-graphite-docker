@@ -5,8 +5,10 @@ RUN dpkg-divert --local --rename --add /sbin/initctl
 RUN ln -s /bin/true /sbin/initctl
 
 RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+RUN echo "deb http://ppa.launchpad.net/kmscherer/collectd/ubuntu precise main" >> /etc/apt/sources.list
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv BB3F88236CC89D586A00D1B85C961284FB7B395F
 RUN apt-get update
-RUN apt-get install -y python-cairo collectd libgcrypt11 python-virtualenv build-essential python-dev supervisor sudo
+RUN apt-get install -y python-cairo collectd-core libgcrypt11 python-virtualenv build-essential python-dev supervisor sudo
 
 RUN adduser --system --group --no-create-home collectd && adduser --system --home /opt/graphite graphite
 
